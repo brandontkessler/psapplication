@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="mb-4">
+                <legend class="border-bottom">Pre Concert Inputs</legend>
+                <div class="form-group">
+                    {{ form.series_name.label(class="form-control-label") }}
+
+                    {% if form.series_name.errors %}
+                        {{ form.series_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.series_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.series_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.concert_date.label(class="form-control-label") }}
+
+                    {% if form.concert_date.errors %}
+                        {{ form.concert_date(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.concert_date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.concert_date(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-check">
+                    {{ form.concert_type.label(class="form-control-label") }}
+                    <br>
+
+                    {% if form.concert_type.errors %}
+                        {% for subfield in form.concert_type %}
+                        <tr>
+                            <td>{{ subfield }}</td>
+                            <td>{{ subfield.label }}</td>
+                        </tr>
+                        {% endfor %}
+                        <p class="badge badge-danger">{{ form.concert_type.errors[1] }}</p>
+                    {% else %}
+                        {% for subfield in form.concert_type %}
+                        <tr>
+                            <td>{{ subfield }}</td>
+                            <td>{{ subfield.label }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <br>
+                <div class="form-group border rounded p-3">
+                    <h5>
+                        Ticketing: CSV Files for last 4 years of data for given series
+                    </h5>
+
+                    <hr>
+
+                    {{ form.this_fy_toDate.label(class="form-control-label") }}
+
+                    {{ form.this_fy_toDate(class="form-control-file") }}
+                    {% if form.this_fy_toDate.errors %}
+                        {% for error in form.this_fy_toDate.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+                    <hr>
+
+                    {{ form.last_year.label(class="form-control-label") }}
+
+                    {{ form.last_year(class="form-control-file") }}
+                    {% if form.last_year.errors %}
+                        {% for error in form.last_year.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+                    <hr>
+
+                    {{ form.two_years_back.label(class="form-control-label") }}
+
+                    {{ form.two_years_back(class="form-control-file") }}
+                    {% if form.two_years_back.errors %}
+                        {% for error in form.two_years_back.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+                    <hr>
+
+                    {{ form.three_years_back.label(class="form-control-label") }}
+
+                    {{ form.three_years_back(class="form-control-file") }}
+                    {% if form.three_years_back.errors %}
+                        {% for error in form.three_years_back.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+
+                </div>
+                <br>
+                <div class="form-group border rounded p-3">
+                    <h5>
+                        Customer: CSV File from 'User Defined Format from List' report in Tessitura
+                    </h5>
+
+                    <hr>
+
+                    {{ form.customer_info.label(class="form-control-label") }}
+
+                    {{ form.customer_info(class="form-control-file") }}
+                    {% if form.customer_info.errors %}
+                        {% for error in form.customer_info.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+                <br>
+                <div class="form-group border rounded p-3">
+                    <h5>
+                        Donor: CSV File from 'enhanced_activity_fund' report in Tessitura
+                    </h5>
+
+                    <hr>
+
+                    {{ form.donor_info.label(class="form-control-label") }}
+
+                    {{ form.donor_info(class="form-control-file") }}
+                    {% if form.donor_info.errors %}
+                        {% for error in form.donor_info.errors %}
+                            <span class="text-danger">{{ error }}</span><br>
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

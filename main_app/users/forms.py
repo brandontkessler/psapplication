@@ -19,6 +19,12 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('That email is taken')
 
+        email_domain = email.data.split("@",1)[1]
+        passing_domain = "pacificsymphony.org"
+
+        if email_domain != passing_domain:
+            raise ValidationError('That is not a Pacific Symphony email')
+
 
 class LoginForm(FlaskForm):
 

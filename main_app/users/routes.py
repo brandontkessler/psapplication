@@ -31,18 +31,18 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password,
-                                               form.password.data):
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
+            # if user is redirected to login page,
+            # we can access the parameter of the page that they came from
+            # and direct them back to the page they were trying to access
+            # before logging in.
             next_page = request.args.get('next')
-            if next_page:
-                return redirect(next_page)
-            else:
-                return redirect(url_for('main.home'))
+            flash('You are logged in', 'success')
+            return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
-            flash('Login Unsuccessful. Please check email and password',
-                  'danger')
-    return render_template('login.html', title="Login", form=form)
+            flash('Login unsuccessful. Check email or password', 'danger')
+    return render_template('login.html', title='Login', form=form)
 
 @users.route("/logout")
 def logout():

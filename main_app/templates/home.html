@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Home</h1>
-    <p>Hello world!</p>
+    <div class="content-section">
+        <h1 class="border-bottom">PS Applications</h1>
+        <a href="{{ url_for('applications.preconcert') }}">Pre-Concert</a>
+    </div>
 {% endblock content %}
