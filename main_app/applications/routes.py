@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, flash, send_file
 from flask_login import login_required
 from main_app.applications.forms import PreConcertForm
 from main_app.applications.util.preconcert import pre_concert_fun
+from main_app.decorators import check_confirmed
 
 
 applications = Blueprint('applications', __name__)
@@ -9,6 +10,7 @@ applications = Blueprint('applications', __name__)
 
 @applications.route("/preconcert", methods=["GET", "POST"])
 @login_required
+@check_confirmed
 def preconcert():
     form = PreConcertForm()
     if form.validate_on_submit():
